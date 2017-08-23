@@ -1,7 +1,7 @@
 <h1>Nieuw Toernooi:</h1>
 
 <% if @toernooi.errors.any? %>
-  <div id="error_explanation">
+  <div style="border: 1px solid black">
     <h2><%= pluralize(@toernooi.errors.count, "error") %> zijn gevonden:</h2>
  
     <ul>
@@ -13,7 +13,7 @@
 <% end %>
 
 <%= form_tag(controller: "toernooi", action: "create", method: "post") do %>
-  Naam: <%= text_field(:toernooi, :naam) %>
+  Toernooinaam: <%= text_field(:toernooi, :naam) %>
   <br />
   Wedstrijdleider: <%= text_field(:toernooi, :wedstrijdleider) %>
   <br />
