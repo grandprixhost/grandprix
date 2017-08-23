@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818175753) do
+ActiveRecord::Schema.define(version: 20170823223950) do
 
   create_table "deelnemers", force: :cascade do |t|
     t.string "voornaam"
@@ -34,12 +34,14 @@ ActiveRecord::Schema.define(version: 20170818175753) do
   create_table "groeps", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "toernooi_id"
   end
 
   create_table "partijs", force: :cascade do |t|
     t.string "uitslag"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "groep_id"
   end
 
   create_table "toernoois", force: :cascade do |t|
