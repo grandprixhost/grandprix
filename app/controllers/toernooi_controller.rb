@@ -1,0 +1,2 @@
+class ToernooiController < ApplicationController
+end
