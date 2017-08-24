@@ -1,4 +1,4 @@
-class ToernooiController < ApplicationController
+class ToernooisController < ApplicationController
   
   def index
     @toernoois = Toernooi.all
