@@ -1,0 +1,20 @@
+<% if @deelnemer.errors.any? %>
+  <div style="border: 1px solid black">
+    <h2><%= pluralize(@deelnemer.errors.count, "error") %> zijn gevonden:</h2>
+ 
+    <ul>
+    <% @deelnemer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_tag(controller: controller , action: "create" , method:"post") do %>
+  <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
+  Voornaam: <%= text_field(:deelnemer, :voornaam) %> <br />
+  Achternaam: <%= text_field(:deelnemer, :achternaam) %> <br />
+  Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br />
+  Geboortedatum: <%= date_field(:deelnemer, :geboortedatum) %> <br />
+  <%= submit_tag "Submit" %>
+<% end %>

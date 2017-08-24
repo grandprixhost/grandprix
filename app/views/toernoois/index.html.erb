@@ -1,5 +1,9 @@
-<h1>Alle Toernooien</h1>
+<h1>Alle Toernooien:</h1>
+<hr />
 <% @toernoois.each do |toernooi| %>
-  <%= render partial: "toernooi", object: toernooi %>
+  <%= render partial: "/toernooi", object: toernooi %>
+  <%= link_to "Laat zien", toernooi %>
   <hr />
 <% end %>
+<br /><br />
+<%= link_to "Maak een Nieuw Toernooi", new_toernooi_path %>

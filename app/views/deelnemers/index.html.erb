@@ -1,0 +1,11 @@
+<h1>Alle Deelnemers:</h1>
+
+<% @deelnemers.each do |deelnemer| %>
+  <%= render partial: "/deelnemer", object: deelnemer %>
+  <br />
+  <%= link_to "Laat zien", deelnemer %>
+  <hr />
+<% end %>
+
+<br /><br />
+<%= link_to "Voeg deelnemer toe", new_deelnemer_path %>

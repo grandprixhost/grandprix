@@ -12,7 +12,7 @@
   </div>
 <% end %>
 
-<%= form_tag(controller: "toernooi", action: "create", method: "post") do %>
+<%= form_tag(controller: "toernoois", action: "create", method: "post") do %>
   Toernooinaam: <%= text_field(:toernooi, :naam) %>
   <br />
   Wedstrijdleider: <%= text_field(:toernooi, :wedstrijdleider) %>
@@ -21,3 +21,7 @@
   <br />
   <%= submit_tag("Maak nieuw toernooi") %>
 <% end %>
+
+<br /><br />
+
+<%= link_to "Alle Toernooien", toernoois_path %>

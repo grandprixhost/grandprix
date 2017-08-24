@@ -15,19 +15,25 @@ class ToernooisController < ApplicationController
   def create
     @toernooi = Toernooi.new(toernooi_params)
     if @toernooi.save
-      redirect_to :action => "new" #Waarheen?!
+      redirect_to :action => "index"
     else
       render :action => "new"
     end
   end
 
   def destroy
+    @toernooi = Toernooi.find(params[:id])
+    @toernooi.destroy
+    redirect_to toernoois_path
   end
 
   private
 
     def toernooi_params
       params.require(:toernooi).permit(:naam, :wedstrijdleider, :datum)
+    end
+    def deelnemer_params
+      params.require(:deelnemer).permit(:voornaam, :achternaam, :tussenvoegsel, :geboortedatum)
     end
 
 end
