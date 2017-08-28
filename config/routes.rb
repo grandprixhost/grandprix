@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get "/inschrijven/:id" => "inschrijven#new"
   post "/inschrijven" => "inschrijven#create"
   get "/inschrijven" => "inschrijven#destroy"
+
+  root 'application#homepage'
 end
