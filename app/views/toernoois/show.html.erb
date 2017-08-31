@@ -1,15 +1,24 @@
 <%= render partial: "/toernooi", object: @toernooi %>
+
 <br />
+
 <%= link_to "Schrijf je in voor dit toernooi", action: "new", controller:"inschrijven" %>
+
 <br />
+
 <h3>Alle Ingeschreven Deelnemers:</h3>
+
 <% @toernooi.deelnemers.each do |deelnemer| %>
   <%= render partial: "/deelnemer", object: deelnemer %>
   <br />
-  <%= link_to "Verwijder deze deelnemer", action:"destroy", controller:"inschrijven", toernooi_id: @toernooi.id,deelnemer_id: deelnemer.id %>
+  <%= link_to "Schrijf deze deelnemer uit", action:"destroy", controller:"inschrijven", toernooi_id: @toernooi.id,deelnemer_id: deelnemer.id %>
   <hr />
 <% end %>
-<br />
-<%= link_to "Alle Toernooien", toernoois_path %>
+
 <br /><br /><br />
+
+<%= link_to "Alle Toernooien", toernoois_path %>
+
+<br /><br /><br />
+
 <%= link_to "Verwijder dit toernooi", @toernooi, method: :delete, data: {confirm: "Weet je het zeker? Alle gegevens zijn weg, en iedereen zal zich opnieuw moeten inschrijven."} %>
