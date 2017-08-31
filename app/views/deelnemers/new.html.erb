@@ -1,6 +1,10 @@
 <h1>Nieuwe Deelnemer: </h1>
 
-<%= render partial: "newdeelnemer", locals: {controller: "deelnemers"} %>
+<%= render partial:"/deelnemers/errors" %>
+
+<%= form_tag( {:action => "create", :controller => "deelnemers", :method => "post"}, {}) do %>
+  <%= render partial:"/deelnemers/inschrijfform" %>
+<% end %>
 
 <br /><br />
 

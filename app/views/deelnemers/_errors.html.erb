@@ -1,0 +1,11 @@
+<% if @deelnemer.errors.any? %>
+  <div style="border: 1px solid black">
+    <h2><%= pluralize(@deelnemer.errors.count, "error") %> zijn gevonden:</h2>
+ 
+    <ul>
+    <% @deelnemer.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   post "/inschrijven" => "inschrijven#create"
   get "/inschrijven" => "inschrijven#destroy"
 
-  root 'application#homepage'
+  root 'application#toernoois'
 end

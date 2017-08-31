@@ -15,7 +15,7 @@ class ToernooisController < ApplicationController
   def create
     @toernooi = Toernooi.new(toernooi_params)
     if @toernooi.save
-      redirect_to :action => "index"
+      redirect_to @toernooi
     else
       render :action => "new"
     end

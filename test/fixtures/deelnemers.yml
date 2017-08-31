@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  voornaam: MyString
-  achternaam: MyString
-  tussenvoegsel: MyString
-  geboortedatum: 2017-08-18
+  voornaam: Voornaam
+  achternaam: Achternaam
+  tussenvoegsel: Tussenvoegsel
+  geboortedatum: 2015-04-13
 
 two:
-  voornaam: MyString
-  achternaam: MyString
-  tussenvoegsel: MyString
-  geboortedatum: 2017-08-18
+  voornaam: VN
+  achternaam: AN
+  tussenvoegsel: TV
+  geboortedatum: 2016-05-14
