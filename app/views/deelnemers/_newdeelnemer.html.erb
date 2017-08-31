@@ -10,11 +10,11 @@
   </div>
 <% end %>
 
-<%= form_tag(controller: controller , action: "create" , method:"post") do %>
+<%= form_tag( {:action => "create", :controller => controller  , :method => "post"}, {}) do %>
   <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
-  Voornaam: <%= text_field(:deelnemer, :voornaam) %> <br />
-  Achternaam: <%= text_field(:deelnemer, :achternaam) %> <br />
-  Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br />
-  Geboortedatum: <%= date_field(:deelnemer, :geboortedatum) %> <br />
+  Voornaam: <%= text_field(:deelnemer, :voornaam) %> <br /><br />
+  Achternaam: <%= text_field(:deelnemer, :achternaam) %> <br /><br />
+  Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br /><br />
+  Geboortedatum: <%= date_field(:deelnemer, :geboortedatum) %> <br /><br />
   <%= submit_tag "Submit" %>
 <% end %>
