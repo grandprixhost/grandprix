@@ -26,6 +26,12 @@
         </td>
       </tr>
     <% end %>
+    <% if groep.deelnemers.empty? %>
+      <tr>
+        <td>Geen</td>
+        <td></td>
+      </tr>
+    <% end %>
   <% end %>
 </table>
 

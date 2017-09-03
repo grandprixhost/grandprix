@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   resources :toernoois
   resources :deelnemers
 
+  #aanmelden
+  get "/aanmelden" => "aanmelden#index"
+  get "/aanmelden/:id" => "aanmelden#new"
+  post "/aanmelden" => "aanmelden#create"
+  get "/thx" => "aanmelden#thx"
+
   #inschrijven
   get "/inschrijven/:id" => "inschrijven#new"
   post "/inschrijven" => "inschrijven#create"
@@ -15,4 +21,5 @@ Rails.application.routes.draw do
   post "/indelen/:toernooiid" => "indelen#addingroep"
 
   root 'application#toernoois'
+
 end

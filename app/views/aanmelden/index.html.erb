@@ -1,0 +1,7 @@
+<% @toernoois.each do |toernooi| %>
+  <h1><%= toernooi.naam %></h1>
+  <b>Datum: </b><%= toernooi.datum %> <br />
+  <b>Wedstrijdleider: </b><%= toernooi.wedstrijdleider %> <br />
+  <%= link_to "Schrijf je nu in!", "/aanmelden/#{toernooi.id}" %>
+  <hr />
+<% end %>
