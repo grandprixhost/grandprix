@@ -1,0 +1,31 @@
+<h1><%= @toernooi.naam %></h1>
+
+<%= link_to "Terug naar Toernooi Info", @toernooi %>
+
+<br /><br />
+
+<% dzg = @toernooi.deelnemers.to_a #deelnemers zonder groep %>
+<table>
+  <% @toernooi.groeps.reverse_each do |groep| %>
+    <tr>
+      <th><%= groep.nummer==0 ? "Deelnemers zonder groep" : "Groep #{groep.nummer}"  %> </th>
+      <th><%= link_to "Meer", "/indelen/#{@toernooi.id}/#{groep.nummer}" unless groep.nummer == 0 %></th>
+    </tr>
+    <% groep.deelnemers.each do |deelnemer| %>
+      <% dzg.delete(deelnemer) %>
+      <tr>
+        <td>
+          <%= deelnemer.naam %>
+        </td>
+        <td>
+          <%= form_tag do %>
+            <%= hidden_field_tag(:deelnemerid, deelnemer.id ) %>
+            <%= number_field(:groep, :nummer, min:0 ) %>
+            <%= submit_tag "Stop in groep no." %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+

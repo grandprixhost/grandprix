@@ -15,6 +15,7 @@ class ToernooisController < ApplicationController
   def create
     @toernooi = Toernooi.new(toernooi_params)
     if @toernooi.save
+      @dzg = Groep.create(nummer: 0, toernooi_id: @toernooi.id)
       redirect_to @toernooi
     else
       render :action => "new"

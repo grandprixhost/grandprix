@@ -4,6 +4,7 @@ class InschrijvenControllerTest < ActionDispatch::IntegrationTest
   
   setup do
     @toernooi = toernoois(:one)
+    @toernooi.groeps = [groeps(:one), groeps(:two)]
     @deelnemer = deelnemers(:one)
   end
 

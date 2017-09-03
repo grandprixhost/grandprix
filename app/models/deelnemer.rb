@@ -6,4 +6,8 @@ class Deelnemer < ApplicationRecord
 
   has_many :partijs, foreign_key: "witspeler_id" 
   has_many :partijs, foreign_key: "zwartspeler_id"
+
+  def naam
+    "#{voornaam} #{tussenvoegsel + ' ' unless tussenvoegsel.empty?}#{achternaam}"
+  end
 end

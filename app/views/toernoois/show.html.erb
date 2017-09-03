@@ -1,6 +1,16 @@
-<%= render partial: "/toernooi", object: @toernooi %>
+<h2><%= @toernooi.naam %></h2>
+<b>Wedstrijdleider:</b> <%= @toernooi.wedstrijdleider %> <br />
+<b>Datum:</b> <%= @toernooi.datum.strftime("%d-%m-%Y") %> <br />
 
-<br />
+<br /><br />
+
+<%= link_to "Alle Toernooien", toernoois_path %>
+
+<br /><br />
+
+<%= link_to "Deel dit toernooi in", "/indelen/#{@toernooi.id}" %>
+
+<br /><br />
 
 <%= link_to "Schrijf je in voor dit toernooi", action: "new", controller:"inschrijven" %>
 
@@ -17,7 +27,6 @@
 
 <br /><br /><br />
 
-<%= link_to "Alle Toernooien", toernoois_path %>
 
 <br /><br /><br />
 

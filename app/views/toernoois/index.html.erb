@@ -1,7 +1,9 @@
 <h1>Alle Toernooien:</h1>
 <hr />
 <% @toernoois.each do |toernooi| %>
-  <%= render partial: "/toernooi", object: toernooi %>
+  <h2><%= toernooi.naam %></h2>
+  <b>Wedstrijdleider:</b> <%= toernooi.wedstrijdleider %> <br />
+  <b>Datum:</b> <%= toernooi.datum.strftime("%d-%m-%Y") %> <br />
   <%= link_to "Laat zien", toernooi %>
   <hr />
 <% end %>

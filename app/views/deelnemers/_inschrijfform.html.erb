@@ -1,6 +1,6 @@
 <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
 Voornaam: <%= text_field(:deelnemer, :voornaam) %> <br /><br />
-Achternaam: <%= text_field(:deelnemer, :achternaam) %> <br /><br />
 Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br /><br />
+Achternaam: <%= text_field(:deelnemer, :achternaam) %> <br /><br />
 Geboortedatum: <%= date_field(:deelnemer, :geboortedatum) %> <br /><br />
 <%= submit_tag "Submit" %>

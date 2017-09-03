@@ -1,7 +1,5 @@
 <b>Naam: </b>
-<%= deelnemer.voornaam %>
-<%= deelnemer.tussenvoegsel + " " unless deelnemer.tussenvoegsel.empty? %>
-<%= deelnemer.achternaam %>
+<%= deelnemer.naam %>
 <br />
 <b>Geboortedatum: </b>
 <%= deelnemer.geboortedatum.strftime("%d-%m-%Y") %>
