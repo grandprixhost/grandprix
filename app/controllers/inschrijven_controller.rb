@@ -9,9 +9,9 @@ class InschrijvenController < ApplicationController
     render :action => :new unless @deelnemer.valid?
     @deelnemer = Deelnemer.find_or_create_by(deelnemer_params)
     @deelnemer.tussenvoegsel ||= ""
-    @toernooi.deelnemers.push(@deelnemer) unless @toernooi.deelnemers.exists?(@deelnemer.id)
     @dzg = @toernooi.groeps.find_by(nummer: 0)
     @dzg.deelnemers.push(@deelnemer) unless @toernooi.deelnemers.exists?(@deelnemer.id)
+    @toernooi.deelnemers.push(@deelnemer) unless @toernooi.deelnemers.exists?(@deelnemer.id)
     redirect_to @toernooi
   end
   def destroy

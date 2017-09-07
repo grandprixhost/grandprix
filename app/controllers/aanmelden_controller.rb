@@ -15,9 +15,9 @@ class AanmeldenController < ApplicationController
     @deelnemer.tussenvoegsel ||= ""
     render :action => :new unless @deelnemer.save
 #    @deelnemer = Deelnemer.find_or_create_by(deelnemer_params)
-    @toernooi.deelnemers.push(@deelnemer) unless @toernooi.deelnemers.exists?(@deelnemer.id)
     @dzg = @toernooi.groeps.find_by(nummer: 0)
     @dzg.deelnemers.push(@deelnemer) unless @toernooi.deelnemers.exists?(@deelnemer.id)
+    @toernooi.deelnemers.push(@deelnemer) unless @toernooi.deelnemers.exists?(@deelnemer.id)
     redirect_to "/thx"
   end
 

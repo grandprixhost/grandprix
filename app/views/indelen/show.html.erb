@@ -19,14 +19,40 @@
         <th>Ronde <%= r+1 %></th>
       </tr>
       <% @indeling[r].each_index do |i| %>
+      <%= form_tag( {:action => "invoeren", :controller => "indelen", :method => "post"}, {} ) do %>
         <tr>
           <td style="border: 0px solid black"></td>
           <td> <%= @indeling[r][i][0].naam %> </td>
           <td> <%= @indeling[r][i][1].naam %> </td>
-          <td></td>
-          <td></td>
+            <%= hidden_field_tag(:witspeler_id, @indeling[r][i][0].id ) %> 
+            <%= hidden_field_tag(:zwartspeler_id, @indeling[r][i][1].id) %>
+            <%= hidden_field_tag(:groep_id, @groep.id) %>
+            <% @partij = Partij.find_by(witspeler_id: @indeling[r][i][0].id, zwartspeler_id: @indeling[r][i][1].id) %>
+            <td><%= text_field_tag(:resultaat, @partij ? @partij.uitslag : nil) %></td>
+            <td><%= submit_tag "Resultaat Invoeren" %></td>
         </tr>
+        <% end %>
       <% end %>
     <% end %>
   </tbody>
 </table>
+
+<br /><br /><br />
+
+<% if flash.notice %>
+  <div style="border: 1px solid black">
+    <h4><%= flash.notice %></h4>
+  </div>
+<% end %>
+
+<br /><br /><br />
+
+<i>Voor het invullen van de resultaten, tik een van de volgende teksten in:</i>
+
+<ul>
+  <li><code>1-0</code></li>
+  <li><code>0-1</code></li>
+  <li><code>1/2-1/2</code></li>
+  <li><code>+</code></li>
+  <li><code>-</code></li>
+</ul>

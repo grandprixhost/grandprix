@@ -1,14 +1,14 @@
 class IndelenController < ApplicationController
   
   def show #Round Robin
-    
+
     @toernooi = Toernooi.find(params[:toernooiid])
     @groep = @toernooi.groeps.find_by(nummer: params[:groepnummer])
     @deelnemers = @groep.deelnemers
 
     @indeling = []
     deelnemerscopy = @deelnemers.to_a
-    deelnemerscopy << Deelnemer.new(voornaam:"Bye", tussenvoegsel:"", achternaam:"", geboortedatum:"0001-01-01") if deelnemerscopy.length.odd?
+    deelnemerscopy << Deelnemer.find(46) #Id of the BYE deelnemer
     n = deelnemerscopy.length
     (n-1).times do |r| #r = ronde
       @indeling << []
@@ -16,6 +16,8 @@ class IndelenController < ApplicationController
       op = r.even? ? (r+2)/2 : (r+n+1)/2 
       spelers.delete(op)
       @indeling[r].push([deelnemerscopy[op-1], deelnemerscopy.last])
+      prt = Partij.find_or_create_by(groep_id: @groep.id, witspeler_id: deelnemerscopy[op-1].id, zwartspeler_id: deelnemerscopy.last.id)
+      prt.uitslag ||= "1-0"
 
       until spelers.empty?
         pl = spelers.pop
@@ -25,9 +27,6 @@ class IndelenController < ApplicationController
       end
 
     end
-
-
-    render :action => "show"
 
   end
 
@@ -47,6 +46,14 @@ class IndelenController < ApplicationController
     render :action => "index"
   end
 
-  #private
+  def invoeren
+    uitslag = params[:resultaat].chomp
+    @groep = Groep.find(params[:groep_id])
+    @partij = Partij.find_or_create_by(witspeler_id: params[:witspeler_id], zwartspeler_id: params[:zwartspeler_id], groep_id: params[:groep_id] )
+    @partij.uitslag = uitslag
+    @partij.save
+    flash[:notice] = "Resultaat succesvol ingevoerd!\n#{Deelnemer.find(params[:witspeler_id]).naam}-#{Deelnemer.find(params[:zwartspeler_id]).naam}\t#{uitslag}"
+    redirect_to "/indelen/#{@groep.toernooi_id}/#{@groep.nummer}"
+  end
 
 end
