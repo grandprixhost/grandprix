@@ -1,6 +1,8 @@
 <h1>Alle Deelnemers:</h1>
+<hr />
 
 <% @deelnemers.each do |deelnemer| %>
+  <% next if deelnemer.id == 1 %>
   <%= render partial: "/deelnemer", object: deelnemer %>
   <br />
   <%= link_to "Laat zien", deelnemer %>

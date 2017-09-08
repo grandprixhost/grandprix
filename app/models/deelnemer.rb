@@ -10,4 +10,5 @@ class Deelnemer < ApplicationRecord
   def naam
     "#{voornaam} #{tussenvoegsel + ' ' unless tussenvoegsel.empty?}#{achternaam}"
   end
+
 end

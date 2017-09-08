@@ -3,7 +3,7 @@
 
 <%= link_to "Terug naar alle Groepen", "/indelen/#{@toernooi.id}" %>
 
-<br />
+<br /><br />
 
 <table>
   <thead>
@@ -28,7 +28,7 @@
             <%= hidden_field_tag(:zwartspeler_id, @indeling[r][i][1].id) %>
             <%= hidden_field_tag(:groep_id, @groep.id) %>
             <% @partij = Partij.find_by(witspeler_id: @indeling[r][i][0].id, zwartspeler_id: @indeling[r][i][1].id) %>
-            <td><%= text_field_tag(:resultaat, @partij ? @partij.uitslag : nil) %></td>
+            <td><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag) %></td>
             <td><%= submit_tag "Resultaat Invoeren" %></td>
         </tr>
         <% end %>
@@ -56,3 +56,24 @@
   <li><code>+</code></li>
   <li><code>-</code></li>
 </ul>
+
+<br /><br />
+<hr />
+<br /><br /><br />
+
+<table>
+  <tr>
+    <th>Naam:</th>
+    <th>Punten:</th>
+  </tr>
+  <% @score.each do |s| %>
+    <tr>
+      <td>
+        <%= Deelnemer.find(s[0]).naam %>
+      </td>
+      <td>
+        <%= s[1] %>
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -1,5 +1,7 @@
 <%= render partial: "/deelnemer", object: @deelnemer %>
-<br />
+<br /><br />
+<%= link_to "Wijzig gegevens", edit_deelnemer_path(@deelnemer.id) %>
+<br /><br />
 <%= link_to "Alle Deelnemers", deelnemers_path %>
 <br /><br />
 <%= link_to "Verwijder deze Deelnemer", @deelnemer, method: :delete, data: {confirm: "Zeker weten?"} %>

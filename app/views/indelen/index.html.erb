@@ -20,7 +20,7 @@
         <td>
           <%= form_tag do %>
             <%= hidden_field_tag(:deelnemerid, deelnemer.id ) %>
-            <%= number_field(:groep, :nummer, min:0 ) %>
+            <%= number_field_tag(:nummer, groep.nummer==0 ? nil : groep.nummer, :min => 0 ) %>
             <%= submit_tag "Stop in groep no." %>
           <% end %>
         </td>

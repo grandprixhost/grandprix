@@ -21,6 +21,21 @@ class DeelnemersController < ApplicationController
     end
   end
 
+  def edit
+    @deelnemer = Deelnemer.find(params[:id])
+  end
+
+  def update
+    deelnemer_params[:tussenvoegsel] ||= ""
+    @deelnemer = Deelnemer.find(params[:id])
+    @deelnemer.update_attributes(deelnemer_params)
+    if @deelnemer.save
+      redirect_to :action => "index"
+    else
+      render :action => "edit"
+    end
+  end
+
   def destroy
     @deelnemer = Deelnemer.find(params[:id])
     @deelnemer.destroy
