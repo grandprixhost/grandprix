@@ -26,7 +26,8 @@ class DeelnemersControllerTest < ActionDispatch::IntegrationTest
       post deelnemers_path, params: { deelnemer: { voornaam:"Persoonmervoornaam", 
                                                    achternaam:"Persoonmetachternaam", 
                                                    tussenvoegsel:"", 
-                                                   geboortedatum:"2005-04-13" } } 
+                                                   geboortedatum:"2005-04-13",
+                                                   email:"hetmeestrozewolkjevannederland@hotmail.nl" } } 
     end
     assert_redirected_to deelnemers_path
   end

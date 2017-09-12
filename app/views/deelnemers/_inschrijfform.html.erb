@@ -1,6 +1,15 @@
-<%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
-Voornaam: <%= text_field(:deelnemer, :voornaam) %> <br /><br />
-Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br /><br />
-Achternaam: <%= text_field(:deelnemer, :achternaam) %> <br /><br />
-Geboortedatum: <%= date_field(:deelnemer, :geboortedatum) %> <br /><br />
-<%= submit_tag "Submit" %>
+<%= render partial:"/deelnemers/errors" %>
+
+<%= form_tag({:action => "create", :controller => @controller, :method => "post"}) do %>  
+  <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
+  Voornaam <i>(verplicht)</i>: <%= text_field(:deelnemer, :voornaam) %> <br /><br />
+  Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br /><br />
+  Achternaam <i>(verplicht)</i>: <%= text_field(:deelnemer, :achternaam) %> <br /><br />
+  Geboortedatum <i>(verplicht)</i>: <%= date_field(:deelnemer, :geboortedatum) %> <br /><br />
+  E-mail <i>(verplicht)</i>: <%= email_field(:deelnemer, :email) %> <br /><br />
+  Telefoonnummer: <%= text_field(:deelnemer, :telefoonnummer) %> <br /><br />
+  KNSB-nummer: <%= text_field(:deelnemer, :knsbnummer) %> <br /><br />
+  Rating: <%= text_field(:deelnemer, :rating) %> <br /><br />
+  <%= submit_tag "Submit" %>
+<% end %>
+

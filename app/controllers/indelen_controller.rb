@@ -1,6 +1,4 @@
 class IndelenController < ApplicationController
-  
-  bye_id = 1
 
   def show 
 
@@ -12,7 +10,8 @@ class IndelenController < ApplicationController
 
     @indeling = []
     deelnemerscopy = @deelnemers.to_a
-    deelnemerscopy << Deelnemer.find(bye_id) if deelnemerscopy.length.odd? #59 is the id of the BYE deelnemer.
+    odd = deelnemerscopy.length.odd?
+    deelnemerscopy << Deelnemer.find(1) if odd #59 is the id of the BYE deelnemer.
     n = deelnemerscopy.length
     (n-1).times do |r| #r = ronde
       @indeling << []
@@ -20,9 +19,11 @@ class IndelenController < ApplicationController
       op = r.even? ? (r+2)/2 : (r+n+1)/2 
       spelers.delete(op)
       @indeling[r].push([deelnemerscopy[op-1], deelnemerscopy.last])
-      prt = Partij.find_or_create_by(groep_id: @groep.id, witspeler_id: deelnemerscopy[op-1].id, zwartspeler_id: deelnemerscopy.last.id)
-      prt.uitslag ||= "1-0"
-      prt.save
+      if odd
+        prt = Partij.find_or_create_by(groep_id: @groep.id, witspeler_id: deelnemerscopy[op-1].id, zwartspeler_id: deelnemerscopy.last.id)
+        prt.uitslag ||= "1-0"
+        prt.save
+      end
 
       until spelers.empty?
         pl = spelers.pop
@@ -44,9 +45,9 @@ class IndelenController < ApplicationController
         score[partij.witspeler_id] += 1
       elsif partij.uitslag == "1/2-1/2" 
         score[partij.witspeler_id] += 0.5
-        score[partij.zwartspeler_id] += 0.5 unless partij.zwartspeler_id == bye_id #No points to BYE player
+        score[partij.zwartspeler_id] += 0.5 unless partij.zwartspeler_id == 1 #No points to BYE player
       else
-        score[partij.zwartspeler_id] += 1 unless partij.zwartspeler_id == bye_id #No points to BYE player
+        score[partij.zwartspeler_id] += 1 unless partij.zwartspeler_id == 1 #No points to BYE player
       end
     end
     @score = score.sort_by { |deelnemerid, score| -score }

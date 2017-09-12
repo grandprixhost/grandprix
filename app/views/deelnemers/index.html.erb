@@ -3,7 +3,11 @@
 
 <% @deelnemers.each do |deelnemer| %>
   <% next if deelnemer.id == 1 %>
-  <%= render partial: "/deelnemer", object: deelnemer %>
+  <b>Naam: </b><%= deelnemer.naam %>
+  <br />
+  <b>Geboortedatum: </b><%= deelnemer.geboortedatum.strftime("%d-%m-%Y") %>
+  <br />
+  <b>E-mail: </b><%= deelnemer.email %>
   <br />
   <%= link_to "Laat zien", deelnemer %>
   <hr />

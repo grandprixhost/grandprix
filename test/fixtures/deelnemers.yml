@@ -5,9 +5,11 @@ one:
   achternaam: Achternaam
   tussenvoegsel: Tussenvoegsel
   geboortedatum: 2015-04-13
+  email: "one@one.com"
 
 two:
   voornaam: VN
   achternaam: AN
   tussenvoegsel: TV
   geboortedatum: 2016-05-14
+  email: "two@two.com"

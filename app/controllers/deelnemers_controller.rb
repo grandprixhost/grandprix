@@ -10,10 +10,16 @@ class DeelnemersController < ApplicationController
 
   def new
     @deelnemer = Deelnemer.new
+    @controller = "deelnemers"
   end
+
   def create
     deelnemer_params[:tussenvoegsel] ||= ""
     @deelnemer = Deelnemer.new(deelnemer_params)
+    @deelnemer.email = params[:deelnemer][:email]
+    @deelnemer.telefoonnummer = params[:deelnemer][:telefoonnummer] || ""
+    @deelnemer.knsbnummer = params[:deelnemer][:knsbnummer].to_i || 0
+    @deelnemer.rating = params[:deelnemer][:rating].to_i || 0
     if Deelnemer.find_by(deelnemer_params) || @deelnemer.save
       redirect_to :action => "index"
     else
@@ -29,6 +35,7 @@ class DeelnemersController < ApplicationController
     deelnemer_params[:tussenvoegsel] ||= ""
     @deelnemer = Deelnemer.find(params[:id])
     @deelnemer.update_attributes(deelnemer_params)
+    @deelnemer.update_attributes(email: params[:deelnemer][:email], telefoonnummer: params[:deelnemer][:telefoonnummer], knsbnummer:params[:deelnemer][:knsbnummer], rating: params[:deelnemer][:rating])
     if @deelnemer.save
       redirect_to :action => "index"
     else

@@ -1,10 +1,7 @@
 <h1>Schrijf je nu in!</h1>
 
-<%= render partial:"/deelnemers/errors" %>
+<%= render partial:"/deelnemers/inschrijfform" %>
 
-<%= form_tag( {:action => "create", :controller => "inschrijven", :method => "post"}, {} ) do %>
-  <%= render partial:"/deelnemers/inschrijfform" %>
-<% end %>
 <br /><br />
 
 <%= link_to "Terug naar het toernooi", @toernooi %>

@@ -19,7 +19,8 @@ class InschrijvenControllerTest < ActionDispatch::IntegrationTest
                                         deelnemer: { voornaam:"Persoonmervoornaam", 
                                                      achternaam:"Persoonmetachternaam", 
                                                      tussenvoegsel:"", 
-                                                     geboortedatum:"2005-04-13" } }
+                                                     geboortedatum:"2005-04-13",
+                                                     email:"abc@sesamstraat.com" } }
      end
   end
   
@@ -29,7 +30,8 @@ class InschrijvenControllerTest < ActionDispatch::IntegrationTest
                                         deelnemer: { voornaam: @deelnemer.voornaam,
                                                      achternaam: @deelnemer.achternaam,
                                                      tussenvoegsel:@deelnemer.tussenvoegsel,
-                                                     geboortedatum:@deelnemer.geboortedatum } }
+                                                     geboortedatum:@deelnemer.geboortedatum,
+                                                     email:@deelnemer.email } }
      end
   end
 

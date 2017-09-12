@@ -19,7 +19,17 @@
 <h3>Alle Ingeschreven Deelnemers:</h3>
 
 <% @toernooi.deelnemers.each do |deelnemer| %>
-  <%= render partial: "/deelnemer", object: deelnemer %>
+  <b>Naam: </b>
+  <%= deelnemer.naam %>
+  <br />
+  <b>Geboortedatum: </b>
+  <%= deelnemer.geboortedatum.strftime("%d-%m-%Y") %>
+  <br />
+  <b>E-mail: </b>
+  <%= deelnemer.email %>
+  <br />
+  <b>Rating: </b>
+  <%= deelnemer.rating %>
   <br />
   <%= link_to "Schrijf deze deelnemer uit", action:"destroy", controller:"inschrijven", toernooi_id: @toernooi.id,deelnemer_id: deelnemer.id %>
   <hr />

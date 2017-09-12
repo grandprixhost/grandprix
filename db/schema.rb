@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901134731) do
+ActiveRecord::Schema.define(version: 20170910072023) do
 
   create_table "deelnemers", force: :cascade do |t|
     t.string "voornaam"
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 20170901134731) do
     t.date "geboortedatum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "telefoonnummer"
+    t.integer "knsbnummer"
+    t.integer "rating"
   end
 
   create_table "deelnemers_groeps", id: false, force: :cascade do |t|
