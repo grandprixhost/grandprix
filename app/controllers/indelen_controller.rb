@@ -21,7 +21,7 @@ class IndelenController < ApplicationController
       @indeling[r].push([deelnemerscopy[op-1], deelnemerscopy.last])
       if odd
         prt = Partij.find_or_create_by(groep_id: @groep.id, witspeler_id: deelnemerscopy[op-1].id, zwartspeler_id: deelnemerscopy.last.id)
-        prt.uitslag ||= "1-0"
+        prt.uitslag ||= "+"
         prt.save
       end
 
@@ -46,6 +46,13 @@ class IndelenController < ApplicationController
       elsif partij.uitslag == "1/2-1/2" 
         score[partij.witspeler_id] += 0.5
         score[partij.zwartspeler_id] += 0.5 unless partij.zwartspeler_id == 1 #No points to BYE player
+      elsif partij.uitslag == "+"
+        score[partij.witspeler_id] += 1
+      elsif partij.uitslag == "-"
+        score[partij.zwartspeler_id] += 1 unless partij.zwartspeler_id == 1
+      elsif partij.uitslag == "="
+        score[partij.witspeler_id] += 0.5
+        score[partij.zwartspeler_id] += 0.5 unless partij.zwartspeler_id == 1
       else
         score[partij.zwartspeler_id] += 1 unless partij.zwartspeler_id == 1 #No points to BYE player
       end

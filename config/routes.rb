@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   #inschrijven
   get "/inschrijven/:id" => "inschrijven#new"
-  post "/inschrijven" => "inschrijven#create"
+  post "/inschrijven/:id" => "inschrijven#create"
   get "/inschrijven" => "inschrijven#destroy"
 
   #indelen

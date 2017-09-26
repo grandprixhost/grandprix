@@ -1,15 +1,15 @@
-<%= render partial:"/deelnemers/errors" %>
+<!--<%= render partial:"/deelnemers/errors" %>-->
 
-<%= form_tag({:action => "create", :controller => @controller, :method => "post"}) do %>  
+<%= form_for @deelnemer, url: @url do |f| %>
   <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
-  Voornaam <i>(verplicht)</i>: <%= text_field(:deelnemer, :voornaam) %> <br /><br />
-  Tussenvoegsel: <%= text_field(:deelnemer, :tussenvoegsel) %> <br /><br />
-  Achternaam <i>(verplicht)</i>: <%= text_field(:deelnemer, :achternaam) %> <br /><br />
-  Geboortedatum <i>(verplicht)</i>: <%= date_field(:deelnemer, :geboortedatum) %> <br /><br />
-  E-mail <i>(verplicht)</i>: <%= email_field(:deelnemer, :email) %> <br /><br />
-  Telefoonnummer: <%= text_field(:deelnemer, :telefoonnummer) %> <br /><br />
-  KNSB-nummer: <%= text_field(:deelnemer, :knsbnummer) %> <br /><br />
-  Rating: <%= text_field(:deelnemer, :rating) %> <br /><br />
-  <%= submit_tag "Submit" %>
+  <%= hidden_field_tag(:redirect, @redirect||"deelnemers_path" ) %>
+  Voornaam <i>(verplicht)</i>: <%= f.text_field :voornaam %><br /><br />
+  Tussenvoegsel: <%= f.text_field :tussenvoegsel %><br /><br />
+  Achternaam: <i>(verplicht)</i>: <%= f.text_field :achternaam %><br /><br />
+  Geboortedatum <i>(verplicht)</i>: <%= f.date_field :geboortedatum %><br /><br />
+  E-mail <i>(verplicht)</i>: <%= f.email_field :email %><br /><br />
+  Telefoonnummer: <%= f.text_field :telefoonnummer %><br /><br />
+  KNSB-nummer: <%= f.text_field :knsbnummer %><br /><br />
+  Rating: <%= f.text_field :rating %><br /><br />
+  <%= f.submit "Verstuur" %>
 <% end %>
-
