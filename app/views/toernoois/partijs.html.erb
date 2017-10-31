@@ -1,0 +1,11 @@
+<% @groeps.each do |groep| %>
+  <% next if groep.nummer.zero? %>
+  <h1>Groep <%= groep.nummer %></h1>
+  <% groep.partijs.each do |partij| %>
+    <%= partij.witspeler.naam %> - <%= partij.zwartspeler.naam %> <br />
+    <%= partij.uitslag %>
+    <br />
+    <hr />
+    <br />
+  <% end %>
+<% end %>

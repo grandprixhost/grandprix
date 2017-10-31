@@ -1,0 +1,28 @@
+<% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
+  <% next if groep.nummer.zero? %>
+
+  <h1>Groep <%= groep.nummer %>:</h1>
+
+  <% @indelings[groep.nummer].each_index do |r| %>
+    <table>
+      <thead>
+        <th style="border: 0px solid black;"></th>
+        <th>Witspeler</th>
+        <th>Zwartspeler</th>
+        <th>Resultaat</th>
+      </thead>
+      <tbody>
+        <tr><td>Ronde <%= r+1 %></td></tr>
+        <% @indelings[groep.nummer][r].each_index do |i| %>
+          <tr>
+            <td style="border: 0px solid black;"></td>
+            <td><%= Deelnemer.find(@indelings[groep.nummer][r][i][0]).naam %></td>
+            <td><%= Deelnemer.find(@indelings[groep.nummer][r][i][1]).naam %></td>
+            <td><span style="visibility: hidden">---------</span></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br />
+  <% end %>
+<% end %>

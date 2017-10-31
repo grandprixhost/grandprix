@@ -1,0 +1,10 @@
+<br />
+<div>
+  <b>Ronde: </b>
+  <%= link_to "Alle rondes", "/indelen/#{@toernooi.id}/score/" %> 
+  <% (1..24).each do |r| %>
+    &emsp;
+    <%= link_to r.to_s, "/indelen/#{@toernooi.id}/score/?ronde=#{r}" %>
+  <% end %>
+</div>
+<br />

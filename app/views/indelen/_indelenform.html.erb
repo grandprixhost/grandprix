@@ -1,0 +1,6 @@
+<%= link_to deelnemer.naam, deelnemer %> (rating: <%= deelnemer.effrating %> )
+<%= form_tag do %>
+  <%= hidden_field_tag(:deelnemerid, deelnemer.id ) %>
+  <%= number_field_tag(:nummer, :min => 0, :max => 99 ) %>
+  <%= submit_tag "Plaats" %>
+<% end %>

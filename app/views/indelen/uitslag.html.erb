@@ -1,0 +1,25 @@
+<h1>Uitslag</h1>
+
+<% @groeps.each do |groep| %>
+  <% next if groep.nummer.zero? %>
+  <% uitslagen = groep.tussenstand %>
+  <table>
+    <thead>
+      <td style="border: 0px solid black">
+        Groep <%= groep.nummer %>
+      </td>
+      <th>Naam</th>
+      <th>Punten</th>
+    </thead>
+    <tbody>
+      <% uitslagen.each do |deelnemer| %>
+        <tr>
+          <td></td>
+          <td><%= Deelnemer.find(deelnemer[0]).naam %> </td>
+          <td><%= deelnemer[1] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br />
+<% end %>

@@ -1,0 +1,33 @@
+<div class="groep">
+  <table class="invoertable">
+    <thead>
+      <th style="border: 0px solid black" width="20%"><b>Groep <u><%= groep.nummer %></u></b></th>
+      <td width="40%">Witspeler</td>
+      <td width="40%">Zwartspeler</td>
+      <td>Resultaat</td>
+      <td></td>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ronde <%= r+1 %></td>
+      </tr>
+      <% @indelings[groep.nummer][r].each_index do |i| %>
+        <%= form_tag( {action: "invoeren", controller: "indelen", method:"post"}, {} ) do %>
+          <tr>
+            <td style="border: 0px solid black"></td>
+            <% witspeler = Deelnemer.find(@indelings[groep.nummer][r][i][0]) %>
+            <% zwartspeler = Deelnemer.find(@indelings[groep.nummer][r][i][1]) %>
+            <td> <%= witspeler.naam %> </td>
+            <td> <%= zwartspeler.naam %> </td>
+            <%= hidden_field_tag(:witspeler_id, witspeler.id ) %> 
+            <%= hidden_field_tag(:zwartspeler_id, zwartspeler.id) %>
+            <%= hidden_field_tag(:groep_id, groep.id) %>
+            <% @partij = Partij.find_by(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id) %>
+            <td><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag, {size: 7}) %></td>
+            <td><%= submit_tag "Invoeren", {:id => "#{witspeler.id}vs#{zwartspeler.id}", :onclick => "setTimeout(function(){document.getElementById('#{witspeler.id}vs#{zwartspeler.id}').disabled = false }, 1000)"} %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
