@@ -1,5 +1,5 @@
 class Deelnemer < ApplicationRecord
-  validates :voornaam, :achternaam, :geboortedatum, :email, presence: true
+  validates :voornaam, :achternaam, :geboortedatum, presence: true
 
   has_and_belongs_to_many :toernoois
   has_and_belongs_to_many :groeps
@@ -9,6 +9,10 @@ class Deelnemer < ApplicationRecord
 
   def naam
     "#{voornaam} #{tussenvoegsel + ' ' unless tussenvoegsel.empty?}#{achternaam}"
+  end
+
+  def effrating
+    rating.nil?||rating.zero? ? 100 + (Time.now.year - geboortedatum.year) : rating
   end
 
 end

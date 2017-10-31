@@ -28,6 +28,11 @@ class ToernooisController < ApplicationController
     redirect_to toernoois_path
   end
 
+  def partijs
+    @toernooi = Toernooi.find(params[:id])
+    @groeps = @toernooi.groeps.order("nummer").all
+  end
+
   private
 
     def toernooi_params

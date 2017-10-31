@@ -32,11 +32,10 @@ class InschrijvenController < ApplicationController
   end
 
   def destroy
-    # @toernooi = Toernooi.find(params[:toernooi_id])
+    
     @deelnemer = Deelnemer.find(params[:deelnemer_id])
     @deelnemer.toernoois.delete(params[:toernooi_id])
-    @deelnemer.groeps.delete(Groep.find_by(toernooi_id: params[:toernooi_id]))
-    # @toernooi.deelnemers.delete(params[:deelnemer_id])
+    @deelnemer.groeps.delete(Groep.where(toernooi_id: params[:toernooi_id]))
 
     redirect_to toernooi_path(params[:toernooi_id])
   end

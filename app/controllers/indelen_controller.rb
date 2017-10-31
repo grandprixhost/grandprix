@@ -9,72 +9,26 @@ class IndelenController < ApplicationController
     @deelnemers = @groep.deelnemers
 
     @indeling = []
-    deelnemerscopy = @deelnemers.to_a
-    odd = deelnemerscopy.length.odd?
-    deelnemerscopy << Deelnemer.find(1) if odd #59 is the id of the BYE deelnemer.
-    n = deelnemerscopy.length
-    (n-1).times do |r| #r = ronde
-      @indeling << []
-      spelers = (1..(n-1)).to_a
-      op = r.even? ? (r+2)/2 : (r+n+1)/2 
-      spelers.delete(op)
-      @indeling[r].push([deelnemerscopy[op-1], deelnemerscopy.last])
-      if odd
-        prt = Partij.find_or_create_by(groep_id: @groep.id, witspeler_id: deelnemerscopy[op-1].id, zwartspeler_id: deelnemerscopy.last.id)
-        prt.uitslag ||= "+"
-        prt.save
-      end
 
-      until spelers.empty?
-        pl = spelers.pop
-        op = (r+n+1-pl) % (n-1)
-        spelers.delete(op)
-        @indeling[r].push( (pl+op).even? ^ (pl>op) ? [deelnemerscopy[op-1], deelnemerscopy[pl-1]] : [deelnemerscopy[pl-1], deelnemerscopy[op-1]] )
-      end
-
-    end
-
-    #Score Bijhouden
-
-    score = {}
-    @deelnemers.each do |deelnemer|
-      score[deelnemer.id] = 0
-    end
-    @groep.partijs.each do |partij|
-      if partij.uitslag == "1-0"
-        score[partij.witspeler_id] += 1
-      elsif partij.uitslag == "1/2-1/2" 
-        score[partij.witspeler_id] += 0.5
-        score[partij.zwartspeler_id] += 0.5 unless partij.zwartspeler_id == 1 #No points to BYE player
-      elsif partij.uitslag == "+"
-        score[partij.witspeler_id] += 1
-      elsif partij.uitslag == "-"
-        score[partij.zwartspeler_id] += 1 unless partij.zwartspeler_id == 1
-      elsif partij.uitslag == "="
-        score[partij.witspeler_id] += 0.5
-        score[partij.zwartspeler_id] += 0.5 unless partij.zwartspeler_id == 1
-      else
-        score[partij.zwartspeler_id] += 1 unless partij.zwartspeler_id == 1 #No points to BYE player
-      end
-    end
-    @score = score.sort_by { |deelnemerid, score| -score }
+    @score = @groep.tussenstand
 
   end
 
   def index
     @toernooi = Toernooi.find(params[:toernooiid])
+    @groeps = @toernooi.groeps.order("nummer").all
   end
 
   def addingroep
     @toernooi = Toernooi.find(params[:toernooiid])
+    @groeps = @toernooi.groeps.order("nummer").all
     @deelnemer = Deelnemer.find(params[:deelnemerid])
     @groep = @toernooi.groeps.find_or_create_by(nummer: params[:nummer],toernooi_id: @toernooi.id)
-    @toernooi.groeps.each do |groep|
-      groep.deelnemers.delete(@deelnemer.id) if groep.deelnemers.exists?(@deelnemer.id)
-    end
+    @toernooi.groeps.each { |groep| groep.deelnemers.delete(@deelnemer.id) if groep.deelnemers.exists?(@deelnemer.id) }
     @groep.deelnemers << @deelnemer
+    @toernooi.groeps.each { |groep| groep.delete if groep.deelnemers.empty? && groep.nummer != 0 }
 
-    render :action => "index"
+    render "index"
   end
 
   def invoeren
@@ -83,8 +37,37 @@ class IndelenController < ApplicationController
     @partij = Partij.find_or_create_by(witspeler_id: params[:witspeler_id], zwartspeler_id: params[:zwartspeler_id], groep_id: params[:groep_id] )
     @partij.uitslag = uitslag
     @partij.save
+    @partij.delete if uitslag == ""
     flash[:notice] = "Resultaat succesvol ingevoerd!\n#{Deelnemer.find(params[:witspeler_id]).naam}-#{Deelnemer.find(params[:zwartspeler_id]).naam}\t#{uitslag}"
-    redirect_to "/indelen/#{@groep.toernooi_id}/#{@groep.nummer}"
+    #redirect_to "/indelen/#{@groep.toernooi_id}/score"
+  end
+
+  def score
+    @toernooi = Toernooi.find(params[:toernooiid])
+    @indelings = []
+    @groeps = @toernooi.groeps.order("nummer").all
+    @groeps.each do |groep|
+      next if groep.nummer == 0
+
+      @indelings[groep.nummer] = groep.indeling
+    end
+    @rondes = params[:ronde].nil? ? (0..23) : (params[:ronde].to_i-1..params[:ronde].to_i-1)
+  end
+
+  def uitslag
+    @toernooi = Toernooi.find(params[:toernooiid])
+    @groeps = @toernooi.groeps.order("nummer").all
+  end
+
+  def print
+    @toernooi = Toernooi.find(params[:toernooiid])
+    @indelings = []
+    @toernooi.groeps.each do |groep|
+      next if groep.nummer == 0
+
+      @indelings[groep.nummer] = groep.indeling
+      
+    end
   end
 
 end

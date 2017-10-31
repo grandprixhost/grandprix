@@ -1,37 +1,81 @@
-<h1><%= @toernooi.naam %></h1>
-
-<%= link_to "Terug naar Toernooi Info", @toernooi %>
-
-<br /><br />
-
-<% dzg = @toernooi.deelnemers.to_a #deelnemers zonder groep %>
-<table>
-  <% @toernooi.groeps.reverse_each do |groep| %>
-    <tr>
-      <th><%= groep.nummer==0 ? "Deelnemers zonder groep" : "Groep #{groep.nummer}"  %> </th>
-      <th><%= link_to "Meer", "/indelen/#{@toernooi.id}/#{groep.nummer}" unless groep.nummer == 0 %></th>
-    </tr>
-    <% groep.deelnemers.each do |deelnemer| %>
-      <% dzg.delete(deelnemer) %>
-      <tr>
-        <td>
-          <%= deelnemer.naam %>
-        </td>
-        <td>
+<div id="wrap">
+  <div id="header">
+    <h1><%= @toernooi.naam %></h1>
+    <%= link_to "Terug naar Toernooi Info", @toernooi %>
+    <br /><br />
+    <!-- <u>Maak een automatische indeling (Work In Progress)</u>
+    <br /><br />-->
+    <%= link_to "Invoeren resultaten", url_for(controller: "indelen", action: "score") %>
+    <br /><br/ >
+    <%= link_to "Uitslagen", url_for(controller: "indelen", action: "uitslag") %>
+    <br /><br />
+  </div>
+  <hr />
+  <div id="main">
+    <div class="clear"><%= "-"*100 %></div>
+    <div class="dzg">
+      <% groep = @groeps.first %>
+      <b><%= groep.nummer.nil? || groep.nummer.zero? ? "Deelnemers zonder groep" : "Groep #{groep.nummer}" %></b>
+      (Aantal: <i><%= groep.deelnemers.count %></i>)
+      <br />
+      <% dlnmers = groep.deelnemers %>
+      <% dlnmers = dlnmers.sort_by{ |deelnemer| deelnemer.effrating }.reverse %>
+      <% dlnmers.each do |deelnemer| %>
+        <%= link_to deelnemer.naam, deelnemer %> (rating: <%= deelnemer.effrating %> )
+        <%= form_tag do %>
+          <%= hidden_field_tag(:deelnemerid, deelnemer.id ) %>
+          <%= number_field_tag(:nummer, :min => 0, :max => 99 ) %>
+          <%= submit_tag "Plaats" %>
+        <% end %>
+      <% end %>
+      <% if groep.deelnemers.all.empty? %>
+        Geen deelnemers.
+      <% end %>
+    </div>
+    <div class="lefta">
+      <% gr = 0 %>
+      <% @groeps.each do |groep| %>
+        <% gr+=1 %>
+        <% next if gr.odd? || groep.nummer.zero? %>
+        <br /><br />
+        <b><%= groep.nummer.nil? || groep.nummer.zero? ? "Deelnemers zonder groep" : "Groep #{groep.nummer}" %></b>,
+        (Aantal: <%= groep.deelnemers.count %>)
+        <br />
+        <% groep.deelnemers.each do |deelnemer| %>
+          <%= link_to deelnemer.naam, deelnemer %> (rating: <%= deelnemer.effrating %> )
           <%= form_tag do %>
             <%= hidden_field_tag(:deelnemerid, deelnemer.id ) %>
-            <%= number_field_tag(:nummer, groep.nummer==0 ? nil : groep.nummer, :min => 0 ) %>
-            <%= submit_tag "Stop in groep no." %>
+            <%= number_field_tag(:nummer, :min => 0, :max => 99 ) %>
+            <%= submit_tag "Plaats" %>
           <% end %>
-        </td>
-      </tr>
-    <% end %>
-    <% if groep.deelnemers.empty? %>
-      <tr>
-        <td>Geen</td>
-        <td></td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
-
+        <% end %>
+        <% if groep.deelnemers.all.empty? %>
+          Geen deelnemers.
+        <% end %>
+      <% end %>
+    </div>
+    <div class="righta">
+      <% gr = 0 %>
+      <% @groeps.each do |groep| %>
+        <% gr+=1 %>
+        <% next if gr.even? || groep.nummer.zero? %>
+        <br /><br />
+        <b><%= groep.nummer.nil? || groep.nummer.zero? ? "Deelnemers zonder groep" : "Groep #{groep.nummer}" %></b>,
+        (Aantal: <%= groep.deelnemers.count %>)
+        <br />
+        <% groep.deelnemers.each do |deelnemer| %>
+          <%= link_to deelnemer.naam, deelnemer %> (rating: <%= deelnemer.effrating %> )
+          <%= form_tag do %>
+            <%= hidden_field_tag(:deelnemerid, deelnemer.id ) %>
+            <%= number_field_tag(:nummer, :min => 0, :max => 99 ) %>
+            <%= submit_tag "Plaats" %>
+          <% end %>
+        <% end %>
+        <% if groep.deelnemers.all.empty? %>
+          Geen deelnemers.
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div id="footer"></div>
+</div>

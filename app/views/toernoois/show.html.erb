@@ -18,22 +18,30 @@
 
 <h3>Alle Ingeschreven Deelnemers:</h3>
 
-<% @toernooi.deelnemers.each do |deelnemer| %>
-  <b>Naam: </b>
-  <%= deelnemer.naam %>
-  <br />
-  <b>Geboortedatum: </b>
-  <%= deelnemer.geboortedatum.strftime("%d-%m-%Y") %>
-  <br />
-  <b>E-mail: </b>
-  <%= deelnemer.email %>
-  <br />
-  <b>Rating: </b>
-  <%= deelnemer.rating %>
-  <br />
-  <%= link_to "Schrijf deze deelnemer uit", action:"destroy", controller:"inschrijven", toernooi_id: @toernooi.id,deelnemer_id: deelnemer.id %>
-  <hr />
-<% end %>
+Aantal: <%= @toernooi.deelnemers.length %> <br /><br />
+
+<table>
+  <tr>
+    <th>Naam</th>
+    <th>Geboortedatum</th>
+    <th>E-mail</th>
+    <th>Telefoonnummer</th>
+    <th>Rating</th>
+    <th>KNSB nummer</th>
+    <th></th>
+  </tr>
+  <% @toernooi.deelnemers.each do |deelnemer| %>
+    <tr>
+      <td> <%= link_to deelnemer.naam, deelnemer %> </td>
+      <td> <%= deelnemer.geboortedatum.strftime("%d-%m-%Y") %> </td>
+      <td> <%= deelnemer.email||"" %> </td>
+      <td> <%= deelnemer.telefoonnummer %> </td>
+      <td> <%= deelnemer.rating||"" %> </td>
+      <td> <%= deelnemer.knsbnummer||"" %> </td>
+      <td> <%= link_to "Schrijf deze deelnemer uit", action:"destroy", controller:"inschrijven", toernooi_id: @toernooi.id,deelnemer_id: deelnemer.id %> </td>
+    </tr>
+  <% end %>
+</table>
 
 <br /><br /><br />
 
