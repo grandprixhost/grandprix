@@ -9,6 +9,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <aside>
+      <%= render partial: 'shared/navigation' %>
+    </aside>
+
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>
