@@ -1,11 +1,29 @@
-<h1>Alle Toernooien:</h1>
-<hr />
-<% @toernoois.each do |toernooi| %>
-  <h2><%= toernooi.naam %></h2>
-  <b>Wedstrijdleider:</b> <%= toernooi.wedstrijdleider %> <br />
-  <b>Datum:</b> <%= toernooi.datum.strftime("%d-%m-%Y") %> <br />
-  <%= link_to "Laat zien", toernooi %>
-  <hr />
-<% end %>
-<br /><br />
-<%= link_to "Maak een Nieuw Toernooi", new_toernooi_path %>
+<section>
+  <h1>Alle Toernooien</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Naam</th>
+        <th>Wedstrijdleider</th>
+        <th>Datum</th>
+        <th />
+      </tr>
+
+      <tbody>
+        <% @toernoois.each do |toernooi| %>
+          <tr>
+            <td><%= link_to toernooi.naam, toernooi %></td>
+            <td><%= toernooi.wedstrijdleider %></td>
+            <td><%= toernooi.datum.strftime("%d-%m-%Y") %></td>
+            <td><%= link_to "Laat zien", toernooi %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </thead>
+  </table>
+
+  <br />
+
+  <%= link_to "Maak een Nieuw Toernooi", new_toernooi_path %>
+</section>
