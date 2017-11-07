@@ -12,27 +12,4 @@ class InschrijvenControllerTest < ActionDispatch::IntegrationTest
     get "/inschrijven/#{@toernooi.id}"
     assert :success
   end
-
-  test "should register unknown deelnemer" do
-     assert_difference "Deelnemer.count" do
-       post inschrijven_path, params: { toernooi_id: @toernooi.id,
-                                        deelnemer: { voornaam:"Persoonmervoornaam", 
-                                                     achternaam:"Persoonmetachternaam", 
-                                                     tussenvoegsel:"", 
-                                                     geboortedatum:"2005-04-13",
-                                                     email:"abc@sesamstraat.com" } }
-     end
-  end
-  
-  test "shouldnt register known deelnemer" do
-     assert_no_difference "Deelnemer.count" do 
-       post inschrijven_path, params: { toernooi_id: @toernooi.id, 
-                                        deelnemer: { voornaam: @deelnemer.voornaam,
-                                                     achternaam: @deelnemer.achternaam,
-                                                     tussenvoegsel:@deelnemer.tussenvoegsel,
-                                                     geboortedatum:@deelnemer.geboortedatum,
-                                                     email:@deelnemer.email } }
-     end
-  end
-
 end
