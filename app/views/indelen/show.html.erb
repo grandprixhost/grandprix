@@ -27,6 +27,7 @@
             <%= hidden_field_tag(:witspeler_id, @indeling[r][i][0].id ) %> 
             <%= hidden_field_tag(:zwartspeler_id, @indeling[r][i][1].id) %>
             <%= hidden_field_tag(:groep_id, @groep.id) %>
+            <%= hidden_field_tag(:ronde, (r+1)) %>
             <% @partij = Partij.find_by(witspeler_id: @indeling[r][i][0].id, zwartspeler_id: @indeling[r][i][1].id) %>
             <td><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag) %></td>
             <td><%= submit_tag "Resultaat Invoeren" %></td>

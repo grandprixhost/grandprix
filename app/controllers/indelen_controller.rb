@@ -36,6 +36,7 @@ class IndelenController < ApplicationController
     @groep = Groep.find(params[:groep_id])
     @partij = Partij.find_or_create_by(witspeler_id: params[:witspeler_id], zwartspeler_id: params[:zwartspeler_id], groep_id: params[:groep_id] )
     @partij.uitslag = uitslag
+    @partij.ronde = params[:ronde]
     @partij.save
     @partij.delete if uitslag == ""
     flash[:notice] = "Resultaat succesvol ingevoerd!\n#{Deelnemer.find(params[:witspeler_id]).naam}-#{Deelnemer.find(params[:zwartspeler_id]).naam}\t#{uitslag}"
