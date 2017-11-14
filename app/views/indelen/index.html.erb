@@ -7,12 +7,13 @@
     <br /><br />-->
     <%= link_to "Invoeren resultaten", url_for(controller: "indelen", action: "score") %>
     <br /><br/ >
+    <%= link_to "Indeling uitprinten", "/indelen/#{@toernooi.id}/print" %>
+    <br /><br />
     <%= link_to "Uitslagen", url_for(controller: "indelen", action: "uitslag") %>
     <br /><br />
   </div>
   <hr />
   <div id="main">
-    <div class="clear"><%= "-"*100 %></div>
     <div class="dzg">
       <% groep = @groeps.first %>
       <b><%= groep.nummer.nil? || groep.nummer.zero? ? "Deelnemers zonder groep" : "Groep #{groep.nummer}" %></b>

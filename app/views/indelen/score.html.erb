@@ -9,7 +9,6 @@
     <% @rondes.each do |r| %>
       <div class="ronde">
         <h3>Ronde: <%= r+1 %></h3>
-        <div class="clear"><%= "-"*100 %></div>
         <div class="left">
           <% gr = 0 %>
           <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
@@ -31,7 +30,6 @@
             <%= render partial: "groeprondeinvoer", locals: {groep: groep, r: r} %>
           <% end %>
         </div>
-        <div class="clear"><%= "-"*100 %></div>
       </div>
     <% end %>
   </div>

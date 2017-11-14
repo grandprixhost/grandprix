@@ -1,0 +1,15 @@
+nav {
+  width: 100%;
+
+  ul {
+    @media #{$medium-and-up} {
+      width: 90%;
+      margin-left: 5%;
+    }
+
+    @media #{$large-and-up} {
+      width: 60%;
+      margin-left: 20%;
+    }
+  }
+}

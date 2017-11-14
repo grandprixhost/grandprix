@@ -1,27 +1,37 @@
-<h1>Nieuw Toernooi:</h1>
+<section>
+  <h1>Nieuw Toernooi</h1>
 
-<% if @toernooi.errors.any? %>
-  <div style="border: 1px solid black">
-    <h2><%= pluralize(@toernooi.errors.count, "error") %> zijn gevonden:</h2>
- 
-    <ul>
-    <% @toernooi.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+  <% if @toernooi.errors.any? %>
+    <%= @toernooi.errors.inspect %>
+    <div style="border: 1px solid black">
+      <h2><%= pluralize(@toernooi.errors.count, "fout") %> zijn gevonden:</h2>
 
-<%= form_tag(controller: "toernoois", action: "create", method: "post") do %>
-  Toernooinaam: <%= text_field(:toernooi, :naam) %>
-  <br />
-  Wedstrijdleider: <%= text_field(:toernooi, :wedstrijdleider) %>
-  <br />
-  Datum: <%= date_field(:toernooi, :datum) %>
-  <br />
-  <%= submit_tag("Maak nieuw toernooi") %>
-<% end %>
+      <ul>
+      <% @toernooi.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<br /><br />
+  <%= form_tag(controller: "toernoois", action: "create", method: "post") do %>
+    <div class="input-field">
+      <%= text_field(:toernooi, :naam) %>
+      <label>Toernooinaam</label>
+    </div>
 
-<%= link_to "Alle Toernooien", toernoois_path %>
+    <div class="input-field">
+      <%= text_field(:toernooi, :wedstrijdleider) %>
+      <label>Wedstrijdleider</label>
+    </div>
+
+    <div>
+      <label>Datum</label>
+      <%= text_field(:toernooi, :datum, class: "datepicker") %>
+    </div>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+      <i class="material-icons right">send</i>
+    </button>
+  <% end %>
+</section>
