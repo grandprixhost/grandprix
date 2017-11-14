@@ -7,6 +7,8 @@
     <br /><br />-->
     <%= link_to "Invoeren resultaten", url_for(controller: "indelen", action: "score") %>
     <br /><br/ >
+    <%= link_to "Indeling uitprinten", "/indelen/#{@toernooi.id}/print" %>
+    <br /><br />
     <%= link_to "Uitslagen", url_for(controller: "indelen", action: "uitslag") %>
     <br /><br />
   </div>
