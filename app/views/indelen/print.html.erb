@@ -1,3 +1,22 @@
+<script type="text/javascript">
+  function print() {
+    for (i = 0 ; i<document.getElementsByClassName("toprint").length ; i++ ) {
+      var divToPrint = document.getElementsByClassName("toprint")[i];
+      newWin = window.open("");
+      newWin.document.write(divToPrint.outerHTML);
+      for (j=0 ; j< newWin.document.getElementsByTagName("table").length; j++) {
+        newWin.document.getElementsByTagName("table")[j].border = "1px solid black";
+      }
+      newWin.print();
+    }
+  }
+</script>
+
+<br /><br />
+
+<button onclick='javascript:print();'>Print</button>
+
+
 <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
   <% next if groep.nummer.zero? %>
 
