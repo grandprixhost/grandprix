@@ -41,7 +41,7 @@ class AanmeldenController < ApplicationController
   # Code copied from deelnemers_controller.rb
   private 
     def deelnemer_params
-      params.require(:deelnemer).permit(:voornaam, :achternaam, :tussenvoegsel, :geboortedatum, :email, :telefoonnummer, :knsbnummer, :rating)
+      params.require(:deelnemer).permit(:voornaam, :achternaam, :tussenvoegsel, :geboortedatum, :geslacht, :email, :telefoonnummer, :knsbnummer, :rating)
     end
 
     def deelnemer_update_params
@@ -49,6 +49,6 @@ class AanmeldenController < ApplicationController
     end
 
     def deelnemer_ess_params
-      params.require(:deelnemer).permit(:voornaam, :tussenvoegsel, :achternaam, :geboortedatum)
+      params.require(:deelnemer).permit(:voornaam, :tussenvoegsel, :achternaam, :geboortedatum, :geslacht)
     end
 end
