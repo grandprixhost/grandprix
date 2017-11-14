@@ -1,5 +1,3 @@
-<!--<%= render partial:"/deelnemers/errors" %>-->
-
 <%= form_for @deelnemer, url: @url do |f| %>
   <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
   <%= hidden_field_tag(:redirect, @redirect||"deelnemers_path" ) %>
@@ -7,6 +5,9 @@
   Tussenvoegsel: <%= f.text_field :tussenvoegsel %><br /><br />
   Achternaam: <i>(verplicht)</i>: <%= f.text_field :achternaam %><br /><br />
   Geboortedatum <i>(verplicht)</i>: <%= f.date_field :geboortedatum %><br /><br />
+  Geslacht <i>(verplicht)</i>: <br />
+  <%= f.radio_button :geslacht, "man" %><%= f.label :geslacht_man, "Man" %><br />
+  <%= f.radio_button :geslacht, "vrouw" %><%= f.label :geslacht_vrouw, "Vrouw" %><br /><br />
   E-mail: <%= f.email_field :email %><br /><br />
   Telefoonnummer: <%= f.text_field :telefoonnummer %><br /><br />
   KNSB-nummer: <%= f.text_field :knsbnummer %><br /><br />
