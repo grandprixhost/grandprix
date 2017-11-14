@@ -12,7 +12,6 @@
   </div>
   <hr />
   <div id="main">
-    <div class="clear"><%= "-"*100 %></div>
     <div class="dzg">
       <% groep = @groeps.first %>
       <b><%= groep.nummer.nil? || groep.nummer.zero? ? "Deelnemers zonder groep" : "Groep #{groep.nummer}" %></b>
