@@ -12,6 +12,12 @@
   }
 </script>
 
+<br /><br />
+
+<button onclick="print();">Print Tussenstand/Uitslag</button>
+
+<br /><br />
+
 <% @groeps.each do |groep| %>
   <% next if groep.nummer.zero? %>
   <% uitslagen = groep.tussenstand %>

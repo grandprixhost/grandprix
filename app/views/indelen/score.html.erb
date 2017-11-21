@@ -1,3 +1,34 @@
+<style type="text/css">
+  .rTable 
+  { 
+    display: table; 
+    width: 100%;
+  } 
+  .rTableRow 
+  { 
+    display: table-row; 
+  }
+  .rTableHeading 
+  { 
+    display: table-header-group; 
+    font-weight: bold;
+  }
+  .rTableBody 
+  { 
+    display: table-row-group; 
+  }
+  .rTableFoot 
+  { 
+    display: table-footer-group; 
+  }
+  .rTableCell, .rTableHead 
+  { 
+    display: table-cell; 
+    padding: 3px 10px;
+    width: 150px;
+  }
+</style>
+
 <div id="wrap">
   <div id="header">
   </div>
@@ -5,31 +36,20 @@
     <%= render partial:"rondenavbar" %>
     <hr />
   </div>
+  <div>
+    <hr />
+    <script type="text/javascript">var changed_games = [];</script>
+    <button onclick="var i=0; function delayedLoop() { document.getElementById(changed_games[i]).click(); console.log(changed_games[i]); if (++i == changed_games.length){alert('Klaar!'); return;} window.setTimeout(delayedLoop, 4100); } delayedLoop();">Alle Resultaten invoeren</button>
+    <hr />
+  </div>
   <div id="main">
     <% @rondes.each do |r| %>
       <div class="ronde">
         <h3>Ronde: <%= r+1 %></h3>
-        <div class="left">
-          <% gr = 0 %>
-          <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
-            <% next if groep.nummer == 0 || ( r >= @indelings[groep.nummer].length ) %>
-            <% gr += 1 %>
-            <% next unless gr.odd? %>
-            <%= render partial:"groeprondeinvoer", locals: {groep: groep, r: r} %>
-          <% end %>
-        </div>
-        <div class="mid">
-          
-        </div>
-        <div class="right">
-          <% gr = 0 %>
-          <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
-            <% next if groep.nummer == 0 || ( r >= @indelings[groep.nummer].length ) %>
-            <% gr += 1 %>
-            <% next unless gr.even? %>
-            <%= render partial: "groeprondeinvoer", locals: {groep: groep, r: r} %>
-          <% end %>
-        </div>
+        <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
+          <% next if groep.nummer == 0 || ( r >= @indelings[groep.nummer].length ) %>
+          <%= render partial:"groeprondeinvoer", locals: {groep: groep, r: r} %>
+        <% end %>
       </div>
     <% end %>
   </div>

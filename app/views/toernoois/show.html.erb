@@ -8,6 +8,7 @@
   <p>
     <%= link_to "Deel dit toernooi in", "/indelen/#{@toernooi.id}" %> </br>
     <%= link_to "Schrijf je in voor dit toernooi", action: "new", controller:"inschrijven" %> </br>
+    <%= link_to "Inschrijflink voor deelnemers", "/aanmelden/#{@toernooi.id}" %><br />
     <%= link_to "Verwijder dit toernooi", @toernooi, method: :delete, data: {confirm: "Weet je het zeker? Alle gegevens zijn weg, en iedereen zal zich opnieuw moeten inschrijven."} %>
   </p>
 
