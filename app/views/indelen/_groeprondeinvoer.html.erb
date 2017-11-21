@@ -30,7 +30,7 @@
             <% j+=1 %>
             <% @partij = Partij.where(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id)[j] %>
           <% end %>
-          <div class="rTableCell"><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag, {size: 7}) %></div>
+          <div class="rTableCell"><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag, {size: 7, onchange:"changed_games.push('#{witspeler.id}vs#{zwartspeler.id}');"}) %></div>
           <div class="rTableCell"><%= submit_tag "Invoeren", {:id => "#{witspeler.id}vs#{zwartspeler.id}", :onclick => "setTimeout(function(){document.getElementById('#{witspeler.id}vs#{zwartspeler.id}').disabled = false }, 1000)"} %></div>
         <% end %>
       </div>
