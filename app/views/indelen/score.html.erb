@@ -28,11 +28,18 @@
     width: 150px;
   }
 </style>
+
 <div id="wrap">
   <div id="header">
   </div>
   <div id="nav">
     <%= render partial:"rondenavbar" %>
+    <hr />
+  </div>
+  <div>
+    <hr />
+    <script type="text/javascript">var changed_games = [];</script>
+    <button onclick="var i=0; function delayedLoop() { document.getElementById(changed_games[i]).click(); console.log(changed_games[i]); if (++i == changed_games.length){alert('Klaar!'); return;} window.setTimeout(delayedLoop, 4100); } delayedLoop();">Alle Resultaten invoeren</button>
     <hr />
   </div>
   <div id="main">
