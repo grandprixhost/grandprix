@@ -32,7 +32,7 @@ class AanmeldenController < ApplicationController
     # And put the deelnemer into the dummy groep 
     @dzg = @toernooi.groeps.find_by(nummer: 0)
     ( @dzg.deelnemers.push(@deelnemer) && @toernooi.deelnemers.push(@deelnemer) ) unless @toernooi.deelnemers.exists?(@deelnemer.id) 
-    redirect_to "thx"
+    redirect_to "/thx"
   end
 
   def thx
