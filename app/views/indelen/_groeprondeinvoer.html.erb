@@ -25,10 +25,11 @@
           <%= hidden_field_tag(:zwartspeler_id, zwartspeler.id) %>
           <%= hidden_field_tag(:groep_id, groep.id) %>
           <%= hidden_field_tag(:ronde, (r+1)) %>
-          <% j=0 %>
-          <% until @partij.nil? || @partij.groep.toernooi_id == @toernooi.id do %>
-            <% j+=1 %>
+          <% j=nil %>
+          <% until !j.nil? & ( @partij.nil? || @partij.groep.toernooi_id == @toernooi.id) do %>
+            <% j||=0 %>
             <% @partij = Partij.where(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id)[j] %>
+            <% j+=1 %>
           <% end %>
           <div class="rTableCell"><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag, {size: 7, onchange:"changed_games.push('#{witspeler.id}vs#{zwartspeler.id}');"}) %></div>
           <div class="rTableCell"><%= submit_tag "Invoeren", {:id => "#{witspeler.id}vs#{zwartspeler.id}", :onclick => "setTimeout(function(){document.getElementById('#{witspeler.id}vs#{zwartspeler.id}').disabled = false }, 1000)"} %></div>
