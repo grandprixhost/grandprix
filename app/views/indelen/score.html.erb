@@ -9,27 +9,10 @@
     <% @rondes.each do |r| %>
       <div class="ronde">
         <h3>Ronde: <%= r+1 %></h3>
-        <div class="left">
-          <% gr = 0 %>
-          <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
-            <% next if groep.nummer == 0 || ( r >= @indelings[groep.nummer].length ) %>
-            <% gr += 1 %>
-            <% next unless gr.odd? %>
-            <%= render partial:"groeprondeinvoer", locals: {groep: groep, r: r} %>
-          <% end %>
-        </div>
-        <div class="mid">
-          
-        </div>
-        <div class="right">
-          <% gr = 0 %>
-          <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
-            <% next if groep.nummer == 0 || ( r >= @indelings[groep.nummer].length ) %>
-            <% gr += 1 %>
-            <% next unless gr.even? %>
-            <%= render partial: "groeprondeinvoer", locals: {groep: groep, r: r} %>
-          <% end %>
-        </div>
+        <% @toernooi.groeps.sort_by{ |groep| groep.nummer }.each do |groep| %>
+          <% next if groep.nummer == 0 || ( r >= @indelings[groep.nummer].length ) %>
+          <%= render partial:"groeprondeinvoer", locals: {groep: groep, r: r} %>
+        <% end %>
       </div>
     <% end %>
   </div>
