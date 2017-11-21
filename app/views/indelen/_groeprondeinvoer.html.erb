@@ -26,7 +26,7 @@
           <%= hidden_field_tag(:groep_id, groep.id) %>
           <%= hidden_field_tag(:ronde, (r+1)) %>
           <% j=nil %>
-          <% until !j.nil? & ( @partij.nil? || @partij.groep.toernooi_id == @toernooi.id) do %>
+          <% until !j.nil? && ( @partij.nil? || @partij.groep.toernooi_id == @toernooi.id) do %>
             <% j||=0 %>
             <% @partij = Partij.where(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id)[j] %>
             <% j+=1 %>
