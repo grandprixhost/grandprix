@@ -1,16 +1,60 @@
 <%= form_for @deelnemer, url: @url do |f| %>
   <%= hidden_field_tag(:toernooi_id, @toernooi.id) unless @toernooi.nil? %>
   <%= hidden_field_tag(:redirect, @redirect||"deelnemers_path" ) %>
-  Voornaam <i>(verplicht)</i>: <%= f.text_field :voornaam %><br /><br />
-  Tussenvoegsel: <%= f.text_field :tussenvoegsel %><br /><br />
-  Achternaam: <i>(verplicht)</i>: <%= f.text_field :achternaam %><br /><br />
-  Geboortedatum <i>(verplicht)</i>: <%= f.date_field :geboortedatum %><br /><br />
-  Geslacht <i>(verplicht)</i>: <br />
-  <%= f.radio_button :geslacht, "man" %><%= f.label :geslacht_man, "Man" %><br />
-  <%= f.radio_button :geslacht, "vrouw" %><%= f.label :geslacht_vrouw, "Vrouw" %><br /><br />
-  E-mail: <%= f.email_field :email %><br /><br />
-  Telefoonnummer: <%= f.text_field :telefoonnummer %><br /><br />
-  KNSB-nummer: <%= f.text_field :knsbnummer %><br /><br />
-  Rating: <%= f.text_field :rating %><br /><br />
-  <%= f.submit "Verstuur" %>
+
+  <div class="input-field">
+    <%= f.text_field(:voornaam) %>
+    <label>Voornaam <i>(verplicht)</i></label>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field(:tussenvoegsel) %>
+    <label>Tussenvoegsel</label>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field(:achternaam) %>
+    <label>Achternaam <i>(verplicht)</i></label>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field(:geboortedatum, class: "datepicker") %>
+    <label>Geboortedatum <i>(verplicht)</i></label>
+  </div>
+
+  Geslacht <i>(verplicht)</i>:
+  <br />
+
+  <p>
+    <%= f.radio_button :geslacht, "man" %>
+    <%= f.label :geslacht_man, "Man" %>
+  </p>
+  <p>
+    <%= f.radio_button :geslacht, "vrouw" %>
+    <%= f.label :geslacht_vrouw, "Vrouw" %>
+  </p>
+
+  <div class="input-field">
+    <%= f.text_field(:email) %>
+    <label>Email</label>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field(:telefoonnummer) %>
+    <label>Telefoonnummer</label>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field(:knsbnummer) %>
+    <label>KNSB-nummer</label>
+  </div>
+
+  <div class="input-field">
+    <%= f.text_field(:rating) %>
+    <label>Rating</label>
+  </div>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">Verstuur
+    <i class="material-icons right">send</i>
+  </button>
 <% end %>
