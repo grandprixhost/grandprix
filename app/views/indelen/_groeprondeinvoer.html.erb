@@ -1,39 +1,39 @@
 <div class="groep">
-  <table class="invoertable">
-    <thead>
-      <th style="border: 0px solid black" width="20%"><b>Groep <%= groep.nummer %></b></th>
-      <td width="40%">Witspeler</td>
-      <td width="40%">Zwartspeler</td>
-      <td>Resultaat</td>
-      <td></td>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Ronde <%= r+1 %></td>
-      </tr>
-      <% @indelings[groep.nummer][r].each_index do |i| %>
+  <div class="rTable">
+    <div class="rTableHeading">
+      <div class="rTableRow">
+        <div class="rTableCell">Groep nummer</div>
+        <div class="rTableCell">Witspeler</div>
+        <div class="rTableCell">Zwartspeler</div>
+        <div class="rTableCell">Resultaat</div>
+        <div class="rTableCell"> </div>
+    </div>
+  </div>
+  <div class="rTableBody">
+    <div class="rTableRow">
+      <div class="rTableCell">Ronde <%= r+1 %></div>
+    </div>
+    <% @indelings[groep.nummer][r].each_index do |i| %>
+      <div class="rTableRow">
+        <div class="rTableCell"> </div>
+        <% witspeler = Deelnemer.find(@indelings[groep.nummer][r][i][0]) %>
+        <% zwartspeler = Deelnemer.find(@indelings[groep.nummer][r][i][1]) %>
+        <div class="rTableCell"><%= witspeler.naam %></div>
+        <div class="rTableCell"><%= zwartspeler.naam %></div>
         <%= form_tag( {action: "invoeren", controller: "indelen", method:"post"}, {} ) do %>
-          <tr>
-            <td style="border: 0px solid black"></td>
-            <% witspeler = Deelnemer.find(@indelings[groep.nummer][r][i][0]) %>
-            <% zwartspeler = Deelnemer.find(@indelings[groep.nummer][r][i][1]) %>
-            <td> <%= witspeler.naam %> </td>
-            <td> <%= zwartspeler.naam %> </td>
-            <%= hidden_field_tag(:witspeler_id, witspeler.id ) %> 
-            <%= hidden_field_tag(:zwartspeler_id, zwartspeler.id) %>
-            <%= hidden_field_tag(:groep_id, groep.id) %>
-            <%= hidden_field_tag(:ronde, (r+1)) %>
-            <% @partij = Partij.find_by(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id) %>
-            <% j=0 %>
-            <% until @partij.nil? || @partij.groep.toernooi_id == @toernooi.id do %>
-              <% j+=1 %>
-              <% @partij = Partij.where(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id)[j] %>
-            <% end %>
-            <td><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag, {size: 7}) %></td>
-            <td><%= submit_tag "Invoeren", {:id => "#{witspeler.id}vs#{zwartspeler.id}", :onclick => "setTimeout(function(){document.getElementById('#{witspeler.id}vs#{zwartspeler.id}').disabled = false }, 1000)"} %></td>
-          </tr>
+          <%= hidden_field_tag(:witspeler_id, witspeler.id ) %> 
+          <%= hidden_field_tag(:zwartspeler_id, zwartspeler.id) %>
+          <%= hidden_field_tag(:groep_id, groep.id) %>
+          <%= hidden_field_tag(:ronde, (r+1)) %>
+          <% j=0 %>
+          <% until @partij.nil? || @partij.groep.toernooi_id == @toernooi.id do %>
+            <% j+=1 %>
+            <% @partij = Partij.where(witspeler_id: witspeler.id, zwartspeler_id: zwartspeler.id)[j] %>
+          <% end %>
+          <div class="rTableCell"><%= text_field_tag(:resultaat, @partij.nil? ? nil : @partij.uitslag, {size: 7}) %></div>
+          <div class="rTableCell"><%= submit_tag "Invoeren", {:id => "#{witspeler.id}vs#{zwartspeler.id}", :onclick => "setTimeout(function(){document.getElementById('#{witspeler.id}vs#{zwartspeler.id}').disabled = false }, 1000)"} %></div>
         <% end %>
-      <% end %>
-    </tbody>
-  </table>
+      </div>
+    <% end %>
+  </div>
 </div>
