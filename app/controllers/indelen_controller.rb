@@ -20,6 +20,7 @@ class IndelenController < ApplicationController
   end
 
   def addingroep
+    (render "index" and return) if params[:nummer].chomp.empty?
     @toernooi = Toernooi.find(params[:toernooiid])
     @groeps = @toernooi.groeps.order("nummer").all
     @deelnemer = Deelnemer.find(params[:deelnemerid])
